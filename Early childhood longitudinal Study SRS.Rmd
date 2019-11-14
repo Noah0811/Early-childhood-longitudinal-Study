@@ -1,0 +1,77 @@
+---
+title: "Untitled"
+author: "Zhongyuan"
+date: "2019/11/14"
+output: html_document
+---
+
+## R Markdown
+Possible research question:
+1.How did teachers and parents evaluate kids differently or similarly from these three aspects of Persistency, Ability to concentrate and Learning Desire? (in degree, can we quantify the difference/similarity?)
+(Periods of time selected were Fall Kindergarten, Spring Kindergarten and Spring First Grade)
+
+matched items are:
+P10--T23
+P15--T24
+P22--T14
+
+2. How did the students improve in these aspects of Getting things well-organized,Learning Desire, Independence on Work, Adapability to changes, Persistence and Ability to concentrate in teachers' eye? (From T1~G6)
+
+3.Predict?the 
+
+
+```{r}
+library(haven)
+df<-read_spss("2010070_atl_spss.sav")
+df<-na.omit(df)
+
+#Keep data only from period FALL KINTERGARTEN; SPRING KINTERGARTEN; SPRING FIRST GRADE
+
+library(dplyr)
+df2<-df%>%
+  dplyr::select(CHILDID,contains("P"),contains("T1"),contains("T2"),contains("T4"))
+
+df_LEARN<-df%>%
+  dplyr::select(P1LEARN,P2LEARN,P4LEARN,T1LEARN,T2LEARN,T4LEARN)
+
+COR_LEARN<-cor(df_LEARN)
+
+library(corrplot)
+corrplot(COR_LEARN, order="AOE", method="circle", tl.pos="ld", type="lower",        
+tl.col="blue", tl.cex=0.8, tl.srt=20, 
+        addCoef.col="black", addCoefasPercent = TRUE,
+        sig.level=0.50, insig = "blank")
+
+
+```
+
+According to the correlation figure, Approaches to learning scale: 
+P1LEARN V.S T1LEARN; P2LEARN V.S T2LEARN; P3LEARN V.S T3LEARN are moderately correlated
+P1LEARN V.S P2LEARN 54; P1LEARN V.S P4LEARN 24; P2LEARN V.S P4LEARN
+T1LEARN V.S T2LEARN 54; T1LEARN V.S T4LEARN 24; T2LEARN V.S T4LEARN 
+
+moderate to week correlation 
+
+```{r}
+#descriptive statistic
+library(psych)
+describe(df_LEARN)
+
+```
+
+```{r}
+#t-test to see the difference
+t.test(df_LEARN$P1LEARN,df_LEARN$T1LEARN) #statistically significant
+t.test(df_LEARN$P2LEARN,df_LEARN$T2LEARN) #statistically significant
+t.test(df_LEARN$P4LEARN,df_LEARN$T4LEARN) #no statistically significant
+
+```
+
+
+```{r cars}
+df_srs<-df[,1:9]
+df_srs_items<-df[,-(2:9)]
+summary(df_srs)
+
+
+summary(cars)
