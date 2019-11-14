@@ -1,7 +1,8 @@
 # Early-childhood-longitudinal-Study
 The data file contains the public-use item-level data for the Social Rating Scale (SRS) Approaches to Learning scales used in the parent and teacher questionnaires of the Early Childhood Longitudinal Study, Kindergarten Class of 1998-99 (ECLS-K).
 
-The data file contains the child identification number (CHILDID). To merge this information with the data on the main data file, researchers should merge by this identification number.
+The data file contains the child identification number (CHILDID). To merge this information with the data on the main data file, researchers should merge by this identification number.**
+
 This document contains the SRS survey items that comprise the parent and teacher Approaches to Learning scales as fielded to parents and teachers, followed by information on how the subscales were constructed.
 The parent Approaches to Learning SRS scale was fielded:
 /n Fall kindergarten [variables on the file begin with P1]
